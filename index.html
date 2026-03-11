@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Cinta Digital ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Kalam:wght@700&display=swap');
+
+        :root {
+            --bg-color: #fef2f2;
+            --main-pink: #fecdd3;
+            --dark-pink: #e11d48;
+            --text-color: #4c1d95;
+            --scrapbook-paper: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden; /* Biar ngga ada scrollbar saat hati jatuh */
+            color: var(--text-color);
+        }
+
+        /* --- Efek Hati Berjatuhan --- */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 182, 193, 0.7);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+        }
+
+        /* --- Styling Container Utama --- */
+        .container {
+            position: relative;
+            background: var(--scrapbook-paper);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 85%;
+            border: 2px solid #ffe4e6;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        .hidden {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* --- Styling Polaroid Frame --- */
+        .polaroid-frame {
+            background: white;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+            transform: rotate(-3deg);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 250px; /* Atur tinggi foto agar seragam */
+            object-fit: cover; /* Foto akan terpotong rapi tanpa gepeng */
+        }
+
+        /* --- Styling Teks --- */
+        h1 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            color: var(--dark-pink);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .highlight {
+            background-color: #ffe4e6;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* --- Styling Stiker --- */
+        .sticker {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            z-index: 11;
+        }
+
+        #sticker1 { top: -40px; right: -30px; transform: rotate(15deg); }
+        #sticker2 { bottom: -30px; left: -30px; transform: rotate(-15deg); }
+        #sticker-final { width: 120px; height: 120px; margin-top: -20px;}
+
+        /* --- Styling Tombol --- */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: white;
+            color: var(--dark-pink);
+            border: 2px solid var(--main-pink);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 0px var(--main-pink);
+        }
+
+        .btn:hover {
+            background-color: var(--main-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0px #f9a8d4;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px #f9a8d4;
+        }
+
+        /* Tombol Utama (Warna Pink) */
+        .btn-primary {
+            background-color: var(--dark-pink);
+            color: white;
+            border: 2px solid var(--dark-pink);
+            box-shadow: 0 4px 0px #9f1239;
+        }
+        
+        .btn-primary:hover {
+            background-color: #be123c;
+            box-shadow: 0 6px 0px #9f1239;
+        }
+
+        /* Tombol "Nggak" yang usil */
+        #btn-no {
+            position: relative;
+            background-color: #f1f5f9;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 0px #cbd5e1;
+            z-index: 999; /* Pastikan di atas segalanya saat lari */
+        }
+
+        /* --- Animasi --- */
+        @keyframes animate {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Membuat durasi jatuh hati berbeda-beda */
+        .heart:nth-child(1) { left: 25%; width: 30px; height: 30px; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .heart:nth-child(3) { left: 70%; width: 25px; height: 25px; animation-delay: 4s; }
+        .heart:nth-child(4) { left: 40%; width: 15px; height: 15px; animation-delay: 0s; animation-duration: 18s; }
+        .heart:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .heart:nth-child(6) { left: 85%; width: 30px; height: 30px; animation-delay: 5s; }
+
+    </style>
+</head>
+<body>
+
+    <div class="hearts">
+        <div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div>
+    </div>
+
+    <div id="tahap1" class="container fade-in">
+        <img src="https://media.tenor.com/264Y34bA858AAAAi/pentol-bunga.gif" alt="Stiker Lucu" class="sticker" id="sticker1">
+        
+        <h1>Puuunten Bu Devita Cantik... 👋</h1>
+        <p>Aku tau kamu lagi <span class="highlight">ngambek</span>, tapi pleasee... kasih aku waktu 1 menit aja buat ngejelasin.</p>
+        <p>Boleeh kan?</p>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="lanjut('tahap1', 'tahap2')">Boleh, cepetan!</button>
+        </div>
+    </div>
+
+    <div id="tahap2" class="container hidden">
+        <div class="polaroid-frame">
+            <img src="mf1.jpeg" alt="Foto Kenangan" onerror="this.src='https://via.placeholder.com/400x300?text=Taruh+Foto+Kalian+Disini'">
+        </div>
+        
+        <h1>Aku Minta Maaf ya... 🥺</h1>
+        <p>Inget ngga foto ini? Kita <span class="highlight">happy banget</span> kan waktu itu? Aku nyesel banget udah bikin senyum kamu ilang.</p>
+        <p>Aku beneran ngga bermaksud gitu. Maafin aku, please?</p>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="lanjut('tahap2', 'tahap3')">Lanjut dulu...</button>
+        </div>
+    </div>
+
+    <div id="tahap3" class="container hidden">
+        <img src="https://media.tenor.com/vH_p8C3uX58AAAAi/pentol-nangis.gif" alt="Stiker Nangis" class="sticker" id="sticker2">
+
+        <h1>Gimana Sekarang?</h1>
+        <p>Aku janji bakal perbaikin sikap aku. Kita <span class="highlight">baikan ya?</span></p>
+        <p>Sayang banget sama kamu 🤍</p>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="lanjut('tahap3', 'tahap4')">Iya, Baikan!</button>
+            <button class="btn" id="btn-no" onmouseover="kabur()" onclick="kabur()">Nggaaak!</button>
+        </div>
+    </div>
+
+    <div id="tahap4" class="container hidden">
+        <div class="polaroid-frame">
+            <img src="mf2.jpeg" alt="Foto Baikan" onerror="this.src='https://via.placeholder.com/400x300?text=Taruh+Foto+Minta+Maaf/Happy'">
+        </div>
+
+        <div style="text-align: center;">
+            <img src="https://media.tenor.com/mU_8vXp5X4YAAAAi/pentol-quby.gif" alt="Stiker Love" class="sticker-final" id="sticker-final">
+        </div>
+
+        <h1>YEEEAY! Sayang Kamu Peach! ❤️ 🎉</h1>
+        <p>Makasih banyak ya udah dimaafin. Kamu emang yang terbaik! <br> Siap-siap ya, habis ini aku <span class="highlight">traktir makanan Eskrim!</span></p>
+    </div>
+
+    <script>
+        // Fungsi untuk pindah tahap dengan efek smooth
+        function lanjut(dariID, keID) {
+            const containerSekarang = document.getElementById(dariID);
+            const containerBerikutnya = document.getElementById(keID);
+
+            // Hide container sekarang
+            containerSekarang.style.opacity = '0';
+            containerSekarang.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                containerSekarang.classList.add('hidden');
+                
+                // Show container berikutnya
+                containerBerikutnya.classList.remove('hidden');
+                setTimeout(() => {
+                    containerBerikutnya.style.opacity = '1';
+                    containerBerikutnya.style.transform = 'translateY(0)';
+                    containerBerikutnya.classList.add('fade-in');
+                }, 50);
+            }, 500); // Sesuai durasi transisi CSS
+        }
+
+        // Fungsi Tombol Kabur yang lebih advanced
+        function kabur() {
+            const btn = document.getElementById('btn-no');
+            
+            // Ubah text tombol biar makin lucu
+            const texts = ["Eh gak bisa!", "Wlee :p", "Eits!", "Nyerah deh", "Pencet 'Iya' aja"];
+            const randomText = texts[Math.floor(Math.random() * texts.length)];
+            btn.innerText = randomText;
+
+            // Hitung area aman agar tombol tidak keluar layar
+            const padding = 20;
+            const maxWidth = window.innerWidth - btn.offsetWidth - padding;
+            const maxHeight = window.innerHeight - btn.offsetHeight - padding;
+
+            // Posisi acak mutlak
+            const randomX = Math.max(padding, Math.random() * maxWidth);
+            const randomY = Math.max(padding, Math.random() * maxHeight);
+
+            // Terapkan posisi baru
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+    </script>
+</body>
+</html>
